@@ -17,12 +17,12 @@ def register(request):
         user = User.objects.filter(username=username).first() # traz do banco de dados os usuarios que eu tenho
 
         if user: 
-            return HttpResponse('Já existe um usuário com esse username')
+            return render(request, "register.html", {"error": "Esse usuario já existe."})
         
         
         newUser = User.objects.create_user(username=username, email=email, password=password)
         newUser.save()
-        return render(request, 'home.html')
+        return redirect('login')
 
 def login(request):
    if request.method == 'GET':
@@ -36,7 +36,7 @@ def login(request):
            login_django(request, user)
            return redirect('home')
        else:
-           return HttpResponse("Email ou senha invalidos.")
+           return render(request, 'login.html', {"error": "Certifique-se de preencher corretamente os campos"})
        
 
 @login_required(login_url="/auth/login/")

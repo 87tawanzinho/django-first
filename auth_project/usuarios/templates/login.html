@@ -32,6 +32,14 @@
         value="Entrar"
         class="bg-green-900 p-2 cursor-pointer hover:bg-green-700"
       />
+      {%if error%}
+      <p>{{error}}</p>
+      {%endif%}
+      <div>
+        <a href="{% url 'register' %}" class="text-yellow-300 underline"
+          >Quero me cadastrar</a
+        >
+      </div>
     </form>
   </body>
 </html>

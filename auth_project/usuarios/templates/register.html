@@ -38,6 +38,14 @@
         value="Cadastrar"
         class="bg-yellow-900 p-2 cursor-pointer hover:bg-yellow-700"
       />
+      {% if error %}
+      <p>{{error}}</p>
+      {%endif%}
+      <div>
+        <a href="{% url 'login' %}" class="text-yellow-300 underline"
+          >Pagina de Login</a
+        >
+      </div>
     </form>
   </body>
 </html>
