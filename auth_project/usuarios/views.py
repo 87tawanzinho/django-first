@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate 
 from django.contrib.auth import login as login_django
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def register(request):
@@ -40,4 +41,12 @@ def login(request):
 
 @login_required(login_url="/auth/login/")
 def home(request):
-    return render(request, 'home.html')
+    if request.method == 'POST' and 'logout' in request.POST:
+        logout(request)
+        return redirect('login')
+    user = request.user.username
+    return render(request, 'home.html', {'username': user})
+
+def user_logout (request): 
+    logout(request)
+    return redirect('login')
